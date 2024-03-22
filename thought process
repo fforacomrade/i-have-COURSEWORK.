@@ -19,4 +19,9 @@ new world? - if new world, how far? we talkin like 2077 (WAKE THE F*CK UP SAMURA
 I am going to create a game (does that work or do i need to write abt like "a program to run a roguelike game") 
 this is going to take a while.
 
+making game in python for purpose of enjoyment, game will run over multiple floors saving a users data in an external json/csv file such as characters, health, items, stats, floors and any other external factors
+the main bulk of the game will be created using oop such as making sure the items, characters and enemies are made using an adult class for each of those 3
+the enemy type will vary over the different chapters which will be procedurally generated upon each random floor using an entirely random OOP system 
+the game will be made using 2d sprites which are an abstraction of each different enemy type
+
 
