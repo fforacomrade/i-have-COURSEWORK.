@@ -1,14 +1,13 @@
 [android]
 debuggable = 0
 display_cutout = 1
-extract_native_libs = 1
 iap_provider = GooglePlay
 immersive_mode = 0
 input_method = HiddenInputField
 manifest = /builtins/manifests/android/AndroidManifest.xml
 minimum_sdk_version = 19
 package = com.example.todo
-target_sdk_version = 34
+target_sdk_version = 33
 version_code = 1
 
 [bootstrap]
@@ -28,7 +27,7 @@ max_count = 128
 [display]
 display_device_info = 0
 display_profiles = /builtins/render/default.display_profilesc
-dynamic_orientation = 0
+dynamic_orientation = 1
 fullscreen = 0
 height = 640
 high_dpi = 0
@@ -52,7 +51,6 @@ default_texture_min_filter = linear
 max_characters = 8192
 max_debug_vertices = 10000
 max_draw_calls = 1024
-max_font_batches = 128
 texture_profiles = /builtins/graphics/default.texture_profilesc
 verify_graphics_calls = 1
 
@@ -92,14 +90,12 @@ infoplist = /builtins/manifests/ios/Info.plist
 launch_screen = /builtins/manifests/ios/LaunchScreen.storyboardc
 localizations = en
 pre_renderered_icons = 0
-privacymanifest = /builtins/manifests/ios/PrivacyInfo.xcprivacy
 
 [label]
 max_count = 64
 subpixels = 1
 
 [liveupdate]
-mount_on_start = 1
 settings = /liveupdate.settings
 
 [mesh]
@@ -120,7 +116,6 @@ bundle_version = 1
 default_language = en
 infoplist = /builtins/manifests/osx/Info.plist
 localizations = en
-privacymanifest = /builtins/manifests/osx/PrivacyInfo.xcprivacy
 
 [particle_fx]
 max_count = 64
