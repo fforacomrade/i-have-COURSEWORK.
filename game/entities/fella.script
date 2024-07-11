@@ -1,0 +1,43 @@
+-- okay so we are making a big fella.
+-- literally all he needs to do is move around as of right now
+-- we will figure out how on gods green EARTH to give this man a gun
+-- dev notes will be present for myself, DO NOT PUT THOSE IN THE PICTURES FOR THE DEVELOPMENT LOG!!!!!!!!!
+
+function init(self)
+	msg.post(".","acquire_input_focus") -- dont know what this means, it will infact not run without this
+
+end
+
+
+function on_input(self, action_id, action)  -- takes in self for oop, action_id is like what it is in game.input_binding 
+	if action_id == hash("left") then       -- i dont know what on earth action does
+		local pos = go.get_position()
+		pos.x = pos.x - 10
+		go.set_position(pos)
+	elseif action_id == hash("right") then
+		local pos = go.get_position()
+		pos.x = pos.x + 10
+		go.set_position(pos)
+	elseif action_id == hash("up") then
+		local pos = go.get_position()
+		pos.y = pos.y + 10
+		go.set_position(pos)
+	elseif action_id == hash("down") then
+		local pos = go.get_position()
+		pos.y = pos.y - 10
+		go.set_position(pos)
+	end	
+end
+
+
+function on_message(self, message_id, message, sender)
+	-- Handle collision
+	if message_id == hash("contact_point_response") then
+		local newpos = go.get_position() + message.normal * message.distance
+		go.set_position(newpos)
+	end
+end
+
+-- use factories for ranged
+-- use script and trigger collision for melee
+-- okay so lets figure out how to make a melee weapon..
