@@ -1,0 +1,20 @@
+-- okay so i made a mindless man
+function init(self)
+	self.speed = 100
+	self.player_id = go.get_id("/player")  -- assuming player is named "player"
+end
+
+function update(self, dt)
+	if go.exists("/player") == true then
+	-- get positions of enemy and player
+		local enemy_pos = go.get_position()
+		local player_pos = go.get_position(self.player_id)
+
+		-- calculate direction to the player
+		local direction = vmath.normalize(player_pos - enemy_pos)
+
+		-- move the enemy towards the player
+		enemy_pos = enemy_pos + direction * self.speed * dt
+		go.set_position(enemy_pos)
+	end
+end
