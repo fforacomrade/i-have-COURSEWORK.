@@ -1,0 +1,25 @@
+-- item.script
+function init(self)
+	msg.post(".","acquire_input_focus")
+	self.player_id = go.get_id("/player")
+end
+
+function update(self, dt)
+	if go.exists("/player") == true then
+		local player_pos = go.get_position("/player")
+		local item_pos = go.get_position()
+
+		local distance = vmath.length(player_pos - item_pos)
+		if distance < 16 then  -- assuming a 16px threshold for collection
+			msg.post("/player", "item_collected")
+			go.delete("/item") 
+			--msg.post("/items/item_manager", "go")
+			-- find a method to get another message for random item
+			-- remove the item once collected -- if method found, push for message relative effect
+		end
+	end
+end	
+
+
+
+	
