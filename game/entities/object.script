@@ -1,6 +1,0 @@
-function init(self)
-	msg.post(".", "acquire_input_focus")
-end 
-
-
--- hehe he just stands there and looks pretty
