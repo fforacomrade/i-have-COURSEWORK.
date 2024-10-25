@@ -1,0 +1,38 @@
+-- okay so i made a mindless man
+function init(self)
+	self.speed = 100
+	self.health = 3
+	self.iframes = 0
+	self.player_id = go.get_id("/player")  -- assuming player is named "player"
+end
+
+function update(self, dt)
+	if self.iframes > 0 then
+		self.iframes = self.iframes - dt
+	end
+	
+	if go.exists("/player") == true then
+	-- get positions of enemy and player
+		local enemy_pos = go.get_position()
+		local player_pos = go.get_position(self.player_id)
+
+		-- calculate direction to the player
+		local direction = vmath.normalize(player_pos - enemy_pos)
+
+		-- move the enemy towards the player
+		enemy_pos = enemy_pos + direction * self.speed * dt
+		go.set_position(enemy_pos)
+		if self.health == 0 then
+			go.delete()
+		end
+	end
+end
+
+function on_message(self, message_id, message)
+	if message_id == hash("brarf") and self.iframes == 0 or self.iframes < 0 then
+		self.health = self.health - 1
+		self.iframes = self.iframes + 1
+		print("Enemy health = "..self.health)
+	end
+end
+
