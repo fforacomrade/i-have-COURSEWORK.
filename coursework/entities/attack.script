@@ -1,0 +1,20 @@
+local alive = 0.75
+
+function init(self)
+	self.spawn_time = socket.gettime()
+end
+
+function on_message(self, message_id, message)
+	if message_id == hash("trigger_response") then
+		msg.post("/enemy", "brarf")
+	end
+end
+		
+function update(self, dt)
+	local now = socket.gettime()
+	if now > self.spawn_time + alive then
+		go.delete()
+	end
+end
+		
+	

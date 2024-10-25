@@ -1,0 +1,85 @@
+-- Define tile types
+local TILE_FLOOR = 0
+local TILE_WALL = 1
+local TILE_OBSTACLE = 2
+local TILE_ENTRANCE = 3
+local TILE_EXIT = 4
+
+-- Room dimensions
+local ROOM_SIZE = 16
+
+-- Probability settings (change these to adjust difficulty or density)
+local OBSTACLE_CHANCE = 0.1
+
+local room_generator = {}
+
+-- Initializes a new 16x16 room
+function room_generator.generate_room()
+	-- Create an empty room array
+	local room = {}
+
+	-- Fill the room with floor tiles initially
+	for y = 1, ROOM_SIZE do
+		room[y] = {}
+		for x = 1, ROOM_SIZE do
+			room[y][x] = TILE_FLOOR
+		end
+	end
+
+	-- Add walls around the room edges
+	for x = 1, ROOM_SIZE do
+		room[1][x] = TILE_WALL
+		room[ROOM_SIZE][x] = TILE_WALL
+	end
+	for y = 1, ROOM_SIZE do
+		room[y][1] = TILE_WALL
+		room[y][ROOM_SIZE] = TILE_WALL
+	end
+
+	-- Add random obstacles
+	for y = 2, ROOM_SIZE - 1 do
+		for x = 2, ROOM_SIZE - 1 do
+			if math.random() < OBSTACLE_CHANCE then
+				room[y][x] = TILE_OBSTACLE
+			end
+		end
+	end
+
+	-- Place entrance and exit in random positions, ensuring they are not the same
+	local entrance_x, entrance_y = math.random(2, ROOM_SIZE - 1), math.random(2, ROOM_SIZE - 1)
+	local exit_x, exit_y = entrance_x, entrance_y
+
+	while exit_x == entrance_x and exit_y == entrance_y do
+		exit_x, exit_y = math.random(2, ROOM_SIZE - 1), math.random(2, ROOM_SIZE - 1)
+	end
+
+	room[entrance_y][entrance_x] = TILE_ENTRANCE
+	room[exit_y][exit_x] = TILE_EXIT
+
+	return room
+end
+
+-- Visualize room (for debugging)
+function room_generator.print_room(room)
+	local symbols = {
+		[TILE_FLOOR] = ".",
+		[TILE_WALL] = "#",
+		[TILE_OBSTACLE] = "O",
+		[TILE_ENTRANCE] = "E",
+		[TILE_EXIT] = "X"
+	}
+
+	for y = 1, ROOM_SIZE do
+		local row = ""
+		for x = 1, ROOM_SIZE do
+			row = row .. symbols[room[y][x]]
+		end
+		print(row)
+	end
+end
+
+return room_generator
+-- TILE_FLOOR: Represents a walkable floor tile.
+--TILE_WALL: Represents the walls around the room.
+--TILE_OBSTACLE: A randomly placed obstacle (like a rock or debris).
+--TILE_ENTRANCE and TILE_EXIT: Mark the start and end points of the room.
