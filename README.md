@@ -11,3 +11,5 @@ If you run into trouble, help is available in [our forum](https://forum.defold.c
 Happy Defolding!
 
 ---
+
+Note: I don't know how to change what git is saying about this but it is written in 100% lua not "go"
